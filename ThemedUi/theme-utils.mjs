@@ -1,12 +1,10 @@
 export const hashIntoColor = (str) => {
 	let hash = 0;
 	for (let i = 0; i < str.length; i++) {
-		// eslint-disable-next-line no-bitwise
-		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+		hash = str.codePointAt(i) + ((hash << 5) - hash);
 	}
 	let color = '#';
 	for (let i = 0; i < 3; i++) {
-		// eslint-disable-next-line no-bitwise
 		const value = (hash >> (i * 8)) & 0xFF;
 		color += value.toString(16).padStart(2, '0');
 	}
@@ -27,68 +25,60 @@ const transparentBorder = {
 
 export const createFlatColorset = (
 	text, textHover, textActive, bg, bgHover, bgActive,
-) => Object.assign(
-	{
-		text,
-		textHover,
-		textActive,
-		bg,
-		bgHover,
-		bgActive,
-	},
-	transparentBorder,
-);
+) => ({
+	text,
+	textHover,
+	textActive,
+	bg,
+	bgHover,
+	bgActive,
+	...transparentBorder,
+});
 
-export const createGhostColorset = (text, textHover, textActive) => Object.assign(
-	{
-		text,
-		textHover,
-		textActive,
-		border: text,
-		borderHover: textHover,
-		borderActive: textActive,
-	},
-	transparentBg,
-);
+export const createGhostColorset = (text, textHover, textActive) => ({
+	text,
+	textHover,
+	textActive,
+	border: text,
+	borderHover: textHover,
+	borderActive: textActive,
+	...transparentBg,
+});
 
-export const createTextColorset = (text, textHover, textActive) => Object.assign(
-	{
-		text,
-		textHover,
-		textActive,
-	},
-	transparentBg,
-	transparentBorder,
-);
+export const createTextColorset = (text, textHover, textActive) => ({
+	text,
+	textHover,
+	textActive,
+	...transparentBg,
+	...transparentBorder,
+});
 
-export const createStateColorsetTriplet = (name) => {
-	return {
-		[name]: createFlatColorset(
-			'spec.white',
-			'spec.white',
-			'spec.white',
-			`bg.${name}`,
-			`bg.${name}plus`,
-			`bg.${name}minus`,
-		),
-		[`${name}ghost`]: {
-			text: `text.${name}`,
-			textHover: `text.${name}plus`,
-			textActive: `text.${name}minus`,
-			bg: 'transparent',
-			bgHover: 'transparent',
-			bgActive: 'transparent',
-			border: `bg.${name}`,
-			borderHover: `bg.${name}plus`,
-			borderActive: `bg.${name}minus`,
-		},
-		[`${name}text`]: createTextColorset(
-			`text.${name}`,
-			`text.${name}plus`,
-			`text.${name}minus`,
-		),
-	};
-};
+export const createStateColorsetTriplet = (name) => ({
+	[name]: createFlatColorset(
+		'spec.white',
+		'spec.white',
+		'spec.white',
+		`bg.${name}`,
+		`bg.${name}plus`,
+		`bg.${name}minus`,
+	),
+	[`${name}ghost`]: {
+		text: `text.${name}`,
+		textHover: `text.${name}plus`,
+		textActive: `text.${name}minus`,
+		bg: 'transparent',
+		bgHover: 'transparent',
+		bgActive: 'transparent',
+		border: `bg.${name}`,
+		borderHover: `bg.${name}plus`,
+		borderActive: `bg.${name}minus`,
+	},
+	[`${name}text`]: createTextColorset(
+		`text.${name}`,
+		`text.${name}plus`,
+		`text.${name}minus`,
+	),
+});
 
 const getShapesForRadius = (radius) => ({
 	all: [radius, radius, radius, radius],
@@ -107,7 +97,7 @@ export const mapShapes = (sm, md, lg, xlg) => ({
 });
 
 export const auxSides = (source) => {
-	const splitted = source ? source.split(/\s+/) : null;
+	const splitted = source ? source.split(/\s+/u) : null;
 	if (!splitted) {
 		return [0, 0, 0, 0];
 	}
@@ -126,4 +116,3 @@ export const auxSides = (source) => {
 	
 	return mapped;
 }
-

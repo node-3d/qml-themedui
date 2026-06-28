@@ -1,3 +1,4 @@
+// oxlint-disable no-unused-vars
 
 const getNested = (source, path) => {
 	if (!path) {
@@ -7,7 +8,7 @@ const getNested = (source, path) => {
 	const count = pathSegments.length;
 	
 	if (!count) {
-		return undefined;
+		return null;
 	}
 	
 	if (count === 1) {
@@ -18,7 +19,7 @@ const getNested = (source, path) => {
 		const segment0 = pathSegments[0] ?? '';
 		const nest1 = source[segment0];
 		if (!nest1 || typeof nest1 !== 'object') {
-			return undefined;
+			return null;
 		}
 		
 		const segment1 = pathSegments[1] ?? '';
@@ -27,12 +28,11 @@ const getNested = (source, path) => {
 	
 	let value = source;
 	
-	for (let i = 0; i < pathSegments.length; i++) {
-		const segment = pathSegments[i] || '';
+	for (const segment of pathSegments) {
 		if (!value || typeof value !== 'object') {
-			return undefined;
+			return null;
 		}
-		value = value[segment];
+		value = value[segment || ''];
 	}
 	
 	return value;

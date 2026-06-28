@@ -2,10 +2,10 @@
 
 This is a part of [Node3D](https://github.com/node-3d) project.
 
-[![NPM](https://badge.fury.io/js/qml-themedui-raub.svg)](https://badge.fury.io/js/qml-themedui-raub)
+[![NPM](https://badge.fury.io/js/%40node-3d%2Fqml-themedui.svg)](https://badge.fury.io/js/@node-3d/qml-themedui)
 
 ```console
-npm i -s qml-themedui-raub
+npm install @node-3d/qml-themedui
 ```
 
 ![Example](examples/screenshot.png)
@@ -99,7 +99,7 @@ IconAwesome {
 }
 ```
 
-This would work with module `qml-fontawesome-raub` as per example.
+This would work with module `@node-3d/qml-fontawesome` as per example.
 Failing to set `iconDelegate` will result in all icons appearing as red boxes.
 
 ## Theming
@@ -315,13 +315,15 @@ import ThemedUi
 ### C++ import path
 
 ```cpp
-qmlEngine->addImportPath("path to qml-themedui-raub");
+qmlEngine->addImportPath("path to @node-3d/qml-themedui");
 ```
 
-### Node.js qml-raub
+### Node.js @node-3d/qml
 
 ```js
-View.libs(require('qml-themedui-raub').absPath);
+import { absPath } from '@node-3d/qml-themedui';
+
+View.libs(absPath);
 ```
 
 ### Manual

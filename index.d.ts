@@ -1,4 +1,4 @@
-declare module "qml-themedui-raub" {
+declare module "@node-3d/qml-themedui" {
 	/**
 	 * Path to this module
 	 *
