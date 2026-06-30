@@ -11,9 +11,9 @@
 		"npm": ">=11.6.2"
 	},
 	"dependencies": {
-		"@node-3d/core": "file:../../3d-core-raub",
-		"@node-3d/plugin-qml": "file:../../3d-qml-raub",
-		"@node-3d/qml-fontawesome": "file:../../qml-fontawesome-raub",
+		"@node-3d/core": "file:../../core",
+		"@node-3d/plugin-qml": "file:../../plugin-qml",
+		"@node-3d/qml-fontawesome": "file:../../qml-fontawesome",
 		"three": "0.174.0"
 	},
 	"devDependencies": {
