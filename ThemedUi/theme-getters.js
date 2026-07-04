@@ -6,43 +6,45 @@ const getNested = (source, path) => {
 	}
 	const pathSegments = path.split('.');
 	const count = pathSegments.length;
-	
+
 	if (!count) {
 		return null;
 	}
-	
+
 	if (count === 1) {
 		return source[path];
 	}
-	
+
 	if (count === 2) {
 		const segment0 = pathSegments[0] ?? '';
 		const nest1 = source[segment0];
 		if (!nest1 || typeof nest1 !== 'object') {
 			return null;
 		}
-		
+
 		const segment1 = pathSegments[1] ?? '';
 		return nest1[segment1];
 	}
-	
+
 	let value = source;
-	
+
 	for (const segment of pathSegments) {
 		if (!value || typeof value !== 'object') {
 			return null;
 		}
 		value = value[segment || ''];
 	}
-	
+
 	return value;
 };
 
-const getThemeShape = (theme, name) => getNested(theme.shapes, name.includes('.') ? name : `${name}.all`);
+const getThemeShape = (theme, name) =>
+	getNested(theme.shapes, name.includes('.') ? name : `${name}.all`);
 
 const getThemeBorder = (theme, name) => getNested(theme.borders, name);
 
-const getThemeSize = (theme, name, prefix) => getNested(theme.sizes, name.includes('.') ? name : `${prefix}.${name}`);
+const getThemeSize = (theme, name, prefix) =>
+	getNested(theme.sizes, name.includes('.') ? name : `${prefix}.${name}`);
 
 const getThemeFont = (theme, name) => getNested(theme.fonts, name);
 
@@ -54,18 +56,14 @@ const getThemeColor = (theme, name) => getNested(theme.colors, name);
 
 const getThemeColorSet = (theme, name, state, colors) => {
 	const colorSets = theme.colorSets;
-    const finalColorset = (
-        typeof colors === 'string'
-            ? colorSets[colors] || colorSets.primary
-            : colors || colorSets.primary
-    );
-    
-    const key = (
-        (state === 'active' && `${name}Active`) ||
-        (state === 'hover' && `${name}Hover`) ||
-        name
-    );
-    const color = finalColorset[key];
-    
-    return getThemeColor(theme, color) || color;
+	const finalColorset =
+		typeof colors === 'string'
+			? colorSets[colors] || colorSets.primary
+			: colors || colorSets.primary;
+
+	const key =
+		(state === 'active' && `${name}Active`) || (state === 'hover' && `${name}Hover`) || name;
+	const color = finalColorset[key];
+
+	return getThemeColor(theme, color) || color;
 };

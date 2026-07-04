@@ -3,7 +3,6 @@ import { Image, Screen, addThreeHelpers, gl, init } from '@node-3d/core';
 import { init as initQml } from '@node-3d/plugin-qml';
 import { absPath } from '@node-3d/qml-fontawesome';
 
-
 const { doc } = init({
 	isGles3: true,
 	isWebGL2: true,
