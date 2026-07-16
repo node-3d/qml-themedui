@@ -2,7 +2,7 @@
 
 This is a part of [Node3D](https://github.com/node-3d) project.
 
-[![NPM](https://badge.fury.io/js/%40node-3d%2Fqml-themedui.svg)](https://badge.fury.io/js/@node-3d/qml-themedui)
+[![NPM](https://badge.fury.io/js/@node-3d%2Fqml-themedui.svg)](https://badge.fury.io/js/@node-3d/qml-themedui)
 
 ```console
 npm install @node-3d/qml-themedui
